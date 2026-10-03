@@ -35,6 +35,17 @@ python3 herramientas/calculadora.py --coste 5 --envio 3 --pvp 24.90
 
 Solo necesitan Python 3.9 o posterior, sin dependencias.
 
+## Estado de la tienda en Shopify (`1x28fm-at.myshopify.com`)
+
+- [x] 9 productos creados en **borrador**, con variantes, precio, coste, peso y SEO
+- [x] 5 colecciones automáticas por etiqueta: Contra el calor, Contra el ruido, Contra la luz, Más vendidos, Ideas para regalar
+- [x] Páginas **sin publicar**: Sobre nosotros, Preguntas frecuentes, Contacto (plantilla `contact`), Aviso legal
+- [ ] Rellenar los `[CORCHETES]` de las páginas y publicarlas
+- [ ] Políticas de envíos y devoluciones (Configuración › Políticas)
+- [ ] Fotos de producto, conectar proveedor y activar productos
+- [ ] Nombre de la tienda, envíos, impuestos, pagos y tema (ver la guía de montaje)
+- [ ] Contratar un plan (la tienda está en prueba)
+
 ## Por dónde empezar
 
 1. Lee el estudio de nicho y haz la validación del apartado 5 (una tarde).
