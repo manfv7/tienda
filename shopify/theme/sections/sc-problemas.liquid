@@ -1,0 +1,80 @@
+{{ 'siesta-co.css' | asset_url | stylesheet_tag }}
+
+<div class="sc-problemas color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    {%- if section.settings.titulo != blank -%}
+      <h2 class="sc-problemas__titulo {{ section.settings.tamano_titulo }}">{{ section.settings.titulo }}</h2>
+    {%- endif -%}
+    {%- if section.settings.texto != blank -%}
+      <div class="sc-problemas__intro rte">{{ section.settings.texto }}</div>
+    {%- endif -%}
+
+    <ul class="sc-problemas__grid" role="list">
+      {%- for block in section.blocks -%}
+        {%- assign coleccion = block.settings.coleccion -%}
+        <li class="sc-problemas__tarjeta" {{ block.shopify_attributes }}>
+          <a class="sc-problemas__enlace" href="{% if coleccion != blank %}{{ coleccion.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">
+            {%- if block.settings.imagen != blank -%}
+              {{ block.settings.imagen | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 33vw, 100vw', widths: '375, 550, 750, 900', class: 'sc-problemas__imagen', alt: block.settings.titulo }}
+            {%- else -%}
+              <span class="sc-problemas__emoji" aria-hidden="true">{{ block.settings.emoji }}</span>
+            {%- endif -%}
+            <span class="sc-problemas__cuerpo">
+              <span class="sc-problemas__nombre h3">{{ block.settings.titulo }}</span>
+              <span class="sc-problemas__desc">{{ block.settings.descripcion }}</span>
+              <span class="sc-problemas__cta">{{ block.settings.cta }} &rarr;</span>
+            </span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SC · Calor, ruido, luz",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "¿Qué no te deja dormir?" },
+    {
+      "type": "select",
+      "id": "tamano_titulo",
+      "label": "Tamaño del título",
+      "options": [
+        { "value": "h2", "label": "Mediano" },
+        { "value": "h1", "label": "Grande" }
+      ],
+      "default": "h1"
+    },
+    { "type": "richtext", "id": "texto", "label": "Texto", "default": "<p>Elige tu enemigo nocturno y te enseñamos cómo vencerlo.</p>" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "problema",
+      "name": "Problema",
+      "settings": [
+        { "type": "text", "id": "titulo", "label": "Título", "default": "El calor" },
+        { "type": "text", "id": "descripcion", "label": "Descripción", "default": "Noches tropicales, sábanas pegadas y vueltas sin parar." },
+        { "type": "text", "id": "emoji", "label": "Emoji (si no hay imagen)", "default": "🔥" },
+        { "type": "image_picker", "id": "imagen", "label": "Imagen" },
+        { "type": "collection", "id": "coleccion", "label": "Colección" },
+        { "type": "text", "id": "cta", "label": "Texto del enlace", "default": "Ver soluciones" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SC · Calor, ruido, luz",
+      "blocks": [
+        { "type": "problema", "settings": { "titulo": "El calor", "emoji": "🔥", "descripcion": "Noches tropicales, sábanas pegadas y vueltas sin parar." } },
+        { "type": "problema", "settings": { "titulo": "El ruido", "emoji": "🔊", "descripcion": "Vecinos, motos, terrazas y ronquidos ajenos." } },
+        { "type": "problema", "settings": { "titulo": "La luz", "emoji": "🌅", "descripcion": "Farolas, persianas que no cierran y amaneceres a las 6:30." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
